@@ -21,7 +21,6 @@ from lab1.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Course/',include('course.urls')),
-    path('Trainee/',include('trainee.urls')),
     path('Login/',login,name="Login_User"),
     path('Register/',register,name="Register_User"),
 ]
