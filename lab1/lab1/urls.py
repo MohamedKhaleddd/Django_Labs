@@ -17,10 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from lab1.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Course/',include('course.urls')),
+    path('Trainee/',include('trainee.urls')),
     path('Login/',login,name="Login_User"),
     path('Register/',register,name="Register_User"),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

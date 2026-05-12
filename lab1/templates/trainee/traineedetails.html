@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%block title %}
+Trainees_List
+{%endblock%}
+ {%block content%}
+<table border="1px solid" width="100%" height="100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Course</th>
+        <th>Image</th>
+
+    </tr>
+
+        <tr>
+            <td>{{trainee.id}}</td>
+            <td>{{trainee.name}}</td>
+            <td>{{trainee.email}}</td>
+            <td>{{trainee.phone}}</td>
+            <td>{{trainee.Course.name}}</td>
+
+            <td>
+                <img src="{{trainee.image}}" width="30%" height="30%" alt="{{trainee.name}}">
+            </td>
+
+
+        </tr>
+
+</table>
+
+
+
+
+{%endblock%}

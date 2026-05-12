@@ -44,9 +44,9 @@ def new_course(request):
 
             name=request.POST['name'],
             description=request.POST['description'],
+            tool=request.POST['tool'],
             price=request.POST['price'],
-            image=request.FILES.get('image')
-
+            image=request.POST['image']
         )
 
         return redirect('Courselist')
