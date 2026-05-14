@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%block title %}
+Update_Trainee
+{%endblock%}
+ {%block content%}
+    <form method="post" enctype="multipart/form-data">
+<!--        random text & expiretime-->
+        {%csrf_token%}
+        <!-- <label>Name</label>
+        <input type="text" name="name" maxlength="100">
+        </br>
+        <label>Email</label>
+        <input type="email" multiple name="email" >
+        <br>
+        <label>Phone</label>
+        <input type="text" multiple name="phone" >
+
+        </br>
+        <input type="file" name="image">
+        </br>
+     <label>Courses</label>
+         <select name="courses">
+            {%for course in courses%}
+            <option value="{{course.code}}"> {{course.name}}</option>
+            {%endfor%}
+        </select> -->
+        {{form}}
+
+        <input type="submit" value ='Update'>
+    </form>
+
+{%endblock%}

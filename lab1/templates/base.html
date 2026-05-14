@@ -22,9 +22,31 @@
     <tr>
         <td colspan="2">
             <h1>Menu</h1>
-            <a href = "{%url 'NewTrainee'%}">New Trainee</a><br>
-            <a href = "{%url 'Traineelist'%}">Trainees</a> <br>
-            <a href = "/admin/">Courses</a><br>
+
+{% if user.is_authenticated %}
+
+    <p>Welcome, {{ user.username }}!</p>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">
+             Logout
+        </button>
+         </form>
+
+            {% else %}
+
+            <a href="{% url 'login' %}">Login</a>
+            <br><br>
+
+            <a href="{% url 'register' %}"> Register</a>
+
+            {% endif %}
+            <a href = "{%url 'NewTrainee'%}">New Trainee</a>
+            <br>
+            <a href = "{%url 'Traineelist'%}">Trainees</a>
+            <br>
+            <a href = "/admin/">Courses</a>
         </td>
         <td colspan="7">
             <h1>Content</h1>

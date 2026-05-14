@@ -9,6 +9,9 @@ class Trainee(models.Model):
     phone=models.CharField(max_length=15)
     image= models.ImageField(upload_to='Trainee_Photo',blank=True,null=True)
     Course=models.ForeignKey(Courses,on_delete=models.CASCADE)
+    is_active=models.BooleanField(default=True)
+
+    
 
     def __str__(self):
         return self.name

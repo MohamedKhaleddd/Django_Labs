@@ -3,18 +3,33 @@ from django.http.response import HttpResponse
 from .models import *
 from course.models import *
 from .forms import *
+from django.views import View
+from django.views import View
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
+
+class Traineelist(LoginRequiredMixin,ListView):
+    queryset= Trainee.objects.filter(is_active=True)
+    model=Trainee
+    template_name='trainee/list.html'
+    context_object_name='trainees'
+    
+
+@login_required
 def trainee_list(request):
+    request.session.clear()
 
     context = {
         'title': 'Tracking',
-        'trainees': Trainee.objects.all()
+        'trainees': Trainee.objects.filter(is_active=True)
     }
 
     return render(request, 'trainee/list.html', context)
 
-
+@login_required
 def gettraineebyid(request, id):
 
     context = {
@@ -23,21 +38,30 @@ def gettraineebyid(request, id):
 
     return render(request, 'trainee/traineedetails.html', context)
 
-
+@login_required
 def update_trainee(request, id):
-
-    return HttpResponse(
-        f'<h1> Update Trainee for id {id} </h1>'
-    )
-
-
-def delete_trainee(request, id):
-
-    return HttpResponse(
-        f'<h1> Delete Trainee for id {id} </h1>'
-    )
+    oldtrainee=Trainee.objects.get(pk=id)
+    if request.method=='POST':
+        form=TraineeFormModel(data=request.POST,files=request.FILES,instance=oldtrainee)
+        if form.is_valid():
+            form.save()
+        else:
+                return render(request,'trainee/update.html',{'form':form,'errors':form.errors})
 
 
+
+    return render(request,'trainee/update.html',{'form':TraineeFormModel(instance=oldtrainee)})
+
+
+
+@login_required
+def softdelete(request,id):
+    Trainee.objects.filter(pk=id).update(is_active=False)
+    return redirect('Traineelist')
+
+
+
+@login_required
 def new_Trainee(request):
 
     if request.method == 'POST':
@@ -64,9 +88,12 @@ def new_Trainee(request):
 
 
     context= {'form':TraineeFormModel()}
+    request.session['info']="Trainee Added"
     return render(request, 'trainee/new.html',context)
 
 
+
+@login_required
 def getTraineebyname(request, name):
 
     objresponse = HttpResponse(
@@ -78,6 +105,8 @@ def getTraineebyname(request, name):
     return objresponse
 
 
+
+@login_required
 def HardTraineeDelete(request, id):
 
     if Trainee.objects.filter(pk=id):

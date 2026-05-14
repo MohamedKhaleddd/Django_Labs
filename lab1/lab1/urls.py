@@ -18,13 +18,19 @@ from django.contrib import admin
 from django.urls import path,include
 from lab1.views import *
 from django.conf import settings
+from django.contrib.auth import login, authenticate
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView,LogoutView
+from accounts.views import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Trainee/',include('trainee.urls')),
-    path('Login/',login,name="Login_User"),
-    path('Register/',register,name="Register_User"),
+    path('Login/',LoginView.as_view(template_name='login.html'),name="login"),
+    path('Logout/',LogoutView.as_view(),name="logout"),
+
+    path('Register/',UserReg.as_view(),name="register"),
 ]
 
 if settings.DEBUG:

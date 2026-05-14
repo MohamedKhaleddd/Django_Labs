@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #Install My apps
     'course.apps.CourseConfig',
     'trainee.apps.TraineeConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,9 @@ STATICFILES_DIRS=['static']
 # Media config
 MEDIA_URL= 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+#redirect
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL='Traineelist'
+LOGOUT_REDIRECT_URL='login'

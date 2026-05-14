@@ -22,7 +22,11 @@ Trainees_List
             <td>{{trainee.Course.name}}</td>
 
             <td>
-                <img src="{{trainee.image}}" width="30%" height="30%" alt="{{trainee.name}}">
+                {%if trainee.image%}
+             <img src="{{trainee.image.url}}" width="30%" height="30%" alt="{{trainee.name}}">
+            {%else%}
+            not found
+            {%endif%}
             </td>
 
 

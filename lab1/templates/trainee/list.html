@@ -34,8 +34,8 @@ Course_list
         </td>
         <td>
                 <a href="{%url 'Trainee_get' trainee.id %}">details</a>
-                <a href>update</a>
-                <a href="">softdelet-update query status</a>
+                <a href="{%url 'TraineeUpdate' trainee.id%}">update</a>
+                <a href="{%url 'SoftDelete' trainee.id%}">softdelet-update query status</a>
                 <a href="{%url 'HardDelTrainee' trainee.id %}">harddelet -delete from db</a>
         </td>
 
