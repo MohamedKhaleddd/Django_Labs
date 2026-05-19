@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path,include
 from .views import *
 
 urlpatterns = [
+    path('API/',include('trainee.api.urls')),
 
     path('', Traineelist.as_view(), name='Traineelist'),
 
